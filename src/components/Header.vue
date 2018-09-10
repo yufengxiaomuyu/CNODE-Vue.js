@@ -36,9 +36,6 @@ export default {
   width: 90%;
   margin: 0 auto;
 }
-* {
-  margin: 0;
-}
 .header {
   min-height: 50px;
   background-color: #444444;

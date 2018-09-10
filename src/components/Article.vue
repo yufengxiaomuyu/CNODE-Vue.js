@@ -51,7 +51,6 @@
 
 <script>
 import Sidebar from './Sidebar'
-import 'github-markdown-css'
 export default {
   name: 'Article',
   data() {
@@ -69,23 +68,23 @@ export default {
     }, 
   },
   methods: {
-  	getArticle() {         
+  	getArticle() {
   		this.$http.get(`https://cnodejs.org/api/v1/topic/${this.$route.params.id}`,)
 				.then(res => {
 					this.isLoading = false
 					if (res.data.success === true) {
 						this.item = res.data.data
-						// console.log(this.item)
+            // console.log(this.item)
           }
 				})
 				.catch(err => {
 					console.log(err)
 				})
   	},
-  },
+  },    
   beforeMount() {
-  	this.isLoading = true;
-  	this.getArticle();
+    	this.isLoading = true;
+    	this.getArticle();
   },
 }
 </script>

@@ -11,7 +11,6 @@
 </template>
 
 <script>
-import $ from 'jquery'	
 export default {
   name: 'Pagination',
   props: ['totalpage',],
@@ -24,9 +23,6 @@ export default {
   		moreNext: false,
   	};
   },
-  componets: {
-
-  },
   methods: {
     //设置分页按钮
   	setpagebtns() {              
@@ -38,7 +34,26 @@ export default {
   				this.pagebtns.unshift(i);
   			};
   		};
+      if (this.currentPage !== 1) {
+        console.log(this.currentPage)
+        this.changePageBtns();
+      }
   	},
+    changePageBtns() {
+      if (this.totalPage < 5) return;
+      this.morePrevious = this.currentPage > 3 ? true : false;
+      this.moreNext = this.currentPage < (this.totalPage -2) ? true : false;
+      if (this.currentPage > 3 && this.currentPage < (this.totalPage -2)) {
+        this.pagebtns = [this.currentPage-2,this.currentPage-1,this.currentPage,this.currentPage+1,this.currentPage+2,];
+        console.log(this.pagebtns); 
+      } else if (this.currentPage <= 3){
+        this.pagebtns = [1,2,3,4,5,];
+        // console.log(this.pagebtns);
+      } else if (this.currentPage >= this.totalPage -2){
+        this.pagebtns = [this.totalPage-4,this.totalPage-3,this.totalPage-2,this.totalPage-1,this.totalPage,];
+        // console.log(this.pagebtns);
+      };
+    },
   	changepage(page) {
   		//处理当前页
   		if (page === this.currentPage) return;
@@ -50,19 +65,7 @@ export default {
   			this.currentPage = this.totalPage
   		};
   		//处理分页按钮
-  		if (this.totalPage < 5) return;
-  		this.morePrevious = this.currentPage > 3 ? true : false;
-  		this.moreNext = this.currentPage < (this.totalPage -2) ? true : false;
-  		if (this.currentPage > 3 && this.currentPage < (this.totalPage -2)) {
-  			this.pagebtns = [this.currentPage-2,this.currentPage-1,this.currentPage,this.currentPage+1,this.currentPage+2,];
-  			console.log(this.pagebtns); 
-  		} else if (this.currentPage <= 3){
-  			this.pagebtns = [1,2,3,4,5,];
-  			// console.log(this.pagebtns);
-  		} else if (this.currentPage >= this.totalPage -2){
-  			this.pagebtns = [this.totalPage-4,this.totalPage-3,this.totalPage-2,this.totalPage-1,this.totalPage,];
-  			// console.log(this.pagebtns);
-  		};
+  		this.changePageBtns();
       // 保存当前页到session并发送给父组件
       sessionStorage.setItem('localCurrentPage',this.currentPage);
       this.$emit('sendPage',this.currentPage);

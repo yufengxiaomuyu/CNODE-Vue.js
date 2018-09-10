@@ -68,7 +68,9 @@ export default {
         this.isLoading = false;
   			this.items = res.data.data;
   			console.log(this.items);   
-  		})
+  		}).catch(err => {
+          console.log(err)
+      })
   	},
   },
   beforeMount() {

@@ -29,5 +29,5 @@ export default new Router({
 				main: UserInfor,	
 			},
 		},
-	]
+	],
 })  

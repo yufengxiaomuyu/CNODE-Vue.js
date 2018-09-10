@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import Axios from 'axios'
 import Router from './router'
+import 'github-markdown-css'
 
 Vue.prototype.$http = Axios
 Vue.config.productionTip = false
